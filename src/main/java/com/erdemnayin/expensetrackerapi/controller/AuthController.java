@@ -4,6 +4,7 @@ import com.erdemnayin.expensetrackerapi.dto.request.LoginRequest;
 import com.erdemnayin.expensetrackerapi.dto.request.RegisterRequest;
 import com.erdemnayin.expensetrackerapi.dto.response.TokenResponse;
 import com.erdemnayin.expensetrackerapi.service.AuthenticationService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<TokenResponse> authenticate(@RequestBody LoginRequest loginRequest){
+    public ResponseEntity<TokenResponse> authenticate(@Valid @RequestBody LoginRequest loginRequest){
         return ResponseEntity.ok(authenticationService.login(loginRequest));
     }
 }
