@@ -90,12 +90,6 @@ public class TransactionService {
     }
 
 
-    public void getAllByLocalDateBetween(LocalDate startDate, LocalDate endDate) throws InterruptedException{
-        List<Transaction> transactionList = transactionRepository.getAllByLocalDateBetween(startDate, endDate);
-        Map<Long,List<Transaction>> map = transactionList.stream().collect(Collectors.groupingBy(Transaction::getId));
-        System.out.println(map);
-    }
-
     public List<TransactionResponse> getAllTransactionsByUserId(Long id) {
 
         User user = userService.getUserById(id);
@@ -174,8 +168,14 @@ public class TransactionService {
 
     // job'lar için
 
+    public List<Transaction> getAllByLocalDateBetween(LocalDate start, LocalDate end){
+        return transactionRepository.getAllByLocalDateBetween(start,end);
+    }
 
+//    getAllByLocalDate
 
-
+    public List<Transaction> getAllByLocalDate(LocalDate today){
+        return transactionRepository.getAllByLocalDate(today);
+    }
 
 }
