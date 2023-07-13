@@ -8,7 +8,6 @@ import com.erdemnayin.expensetrackerapi.exception.GenericException;
 import com.erdemnayin.expensetrackerapi.model.Transaction;
 import com.erdemnayin.expensetrackerapi.model.User;
 import com.erdemnayin.expensetrackerapi.repository.TransactionRepository;
-import org.jobrunr.scheduling.JobScheduler;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -19,14 +18,11 @@ import java.util.List;
 @Service
 public class TransactionService {
 
-    private final JobScheduler jobScheduler;
-
     private final TransactionRepository transactionRepository;
 
     private final UserService userService;
 
-    public TransactionService(JobScheduler jobScheduler, TransactionRepository transactionRepository, UserService userService) {
-        this.jobScheduler = jobScheduler;
+    public TransactionService( TransactionRepository transactionRepository, UserService userService) {
         this.transactionRepository = transactionRepository;
         this.userService = userService;
     }
