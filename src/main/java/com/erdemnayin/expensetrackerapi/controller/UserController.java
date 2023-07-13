@@ -5,6 +5,7 @@ import com.erdemnayin.expensetrackerapi.dto.request.UserWithTransactionsRequest;
 import com.erdemnayin.expensetrackerapi.dto.response.UserResponse;
 import com.erdemnayin.expensetrackerapi.dto.response.UserWithTransactionsResponse;
 import com.erdemnayin.expensetrackerapi.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,13 +32,13 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest){
+    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserRequest userRequest){
         return ResponseEntity.ok(userService.createUser(userRequest));
     }
 
     // this is for the transactional scenario
     @PostMapping("/transactional")
-    public ResponseEntity<UserWithTransactionsResponse> createUserWithTransactions(@RequestBody UserWithTransactionsRequest userWithTransactionsRequest){
+    public ResponseEntity<UserWithTransactionsResponse> createUserWithTransactions(@Valid @RequestBody UserWithTransactionsRequest userWithTransactionsRequest){
         return ResponseEntity.ok(userService.createUserWithTransactions(userWithTransactionsRequest));
     }
 
@@ -48,7 +49,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> updateUser(@RequestBody UserRequest userRequest, @PathVariable Long id){
+    public ResponseEntity<UserResponse> updateUser(@Valid @RequestBody UserRequest userRequest, @PathVariable Long id){
         return ResponseEntity.ok(userService.updateUser(id, userRequest));
 //        return ResponseEntity.ok();
     }

@@ -18,5 +18,8 @@ public class LoginRequest {
 //    @Min(value = 0, message = "Fees value must be greater than zero")
 //    @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
     private String email;
+
+    @NotBlank(message = "password couldn't be blank.")
+    @Size(min=3, message="password must be at least 3 characters long")
     private String password;
 }

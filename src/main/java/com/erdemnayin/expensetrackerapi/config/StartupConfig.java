@@ -5,15 +5,19 @@ import com.erdemnayin.expensetrackerapi.model.Transaction;
 import com.erdemnayin.expensetrackerapi.model.User;
 import com.erdemnayin.expensetrackerapi.repository.TransactionRepository;
 import com.erdemnayin.expensetrackerapi.repository.UserRepository;
+import com.erdemnayin.expensetrackerapi.service.TransactionService;
+import org.jobrunr.scheduling.JobScheduler;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 
+import static org.jobrunr.scheduling.cron.Cron.every15seconds;
+
 @Configuration
 public class StartupConfig implements CommandLineRunner {
+
 
     private final UserRepository userRepository;
 
@@ -21,7 +25,7 @@ public class StartupConfig implements CommandLineRunner {
 
     private final PasswordEncoder passwordEncoder;
 
-    public StartupConfig(UserRepository userRepository, TransactionRepository transactionRepository, PasswordEncoder passwordEncoder) {
+    public StartupConfig(UserRepository userRepository, TransactionRepository transactionRepository, PasswordEncoder passwordEncoder, TransactionService transactionService) {
         this.userRepository = userRepository;
         this.transactionRepository = transactionRepository;
         this.passwordEncoder = passwordEncoder;

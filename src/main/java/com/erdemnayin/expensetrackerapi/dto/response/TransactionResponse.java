@@ -21,7 +21,7 @@ public class TransactionResponse {
 
     private String detail;
 
-    private LocalDateTime dateTime;
+    private LocalDateTime localDateTime;
 
     private Double purchaseAmount;
 

@@ -5,6 +5,7 @@ import com.erdemnayin.expensetrackerapi.dto.response.TotalPurchaseAmountByUserRe
 import com.erdemnayin.expensetrackerapi.dto.response.TotalPurchaseAmountResponse;
 import com.erdemnayin.expensetrackerapi.dto.response.TransactionResponse;
 import com.erdemnayin.expensetrackerapi.service.TransactionService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +42,7 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<TransactionResponse> createTransaction(@RequestBody TransactionRequest transactionRequest){
+    public ResponseEntity<TransactionResponse> createTransaction(@Valid @RequestBody TransactionRequest transactionRequest){
         return ResponseEntity.ok(transactionService.createTransaction(transactionRequest));
     }
 
@@ -51,7 +52,7 @@ public class TransactionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TransactionResponse> updateTransaction(@RequestBody TransactionRequest transactionRequest,
+    public ResponseEntity<TransactionResponse> updateTransaction(@Valid @RequestBody TransactionRequest transactionRequest,
                                                                  @PathVariable Long id){
         return ResponseEntity.ok(transactionService.updateTransaction(id, transactionRequest));
     }

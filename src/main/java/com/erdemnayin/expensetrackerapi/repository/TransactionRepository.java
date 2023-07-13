@@ -10,5 +10,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
-    public Optional<List<Transaction>> getAllByDateTimeBetween(LocalDate startDate, LocalDate endDate);
+    Optional<List<Transaction>> getAllByLocalDateTimeBetween(LocalDateTime startDate, LocalDateTime endDate);
 }
