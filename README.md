@@ -20,6 +20,7 @@ jackson-databind
 ### Creating Asymmetric Key Pair for Signing and Verifying JWT
 
 ```
+publicKey -> verify JWT, privateKey -> sign JWT
 
 resources -> certs package ->  private.pem ve public.pem  : 
 
@@ -49,8 +50,12 @@ commant prompt inc certs directory:
      
     docker run -d -p 8080:8080 --name expense-tracker expense-tracker-app:latest
 
+2. you can push image to Dockerhub
 
-2. you can either use postman or swagger to test API
+3. you can build a pipline(i.e. jenkins) and you can push your app to dockerHub everytime you trigger the pipeline (via git push),
+or you can deploy your docker-image to Kubernetes Cluster
+
+! you can either use postman or swagger to test API
     - go to swagger api and discover the API
         http://localhost:8080/swagger-ui/index.html#/
 
