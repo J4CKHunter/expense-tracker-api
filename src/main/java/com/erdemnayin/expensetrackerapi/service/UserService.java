@@ -169,7 +169,7 @@ public class UserService {
 
         for (TransactionRequest transactionRequest : userWithTransactionsRequest.getTransactionRequests()) {
             user.getTransactions().add(TransactionService.convertResponse(transactionRequest));
-            throw new DataIntegrityViolationException("Throwing exception for demoing Rollback!!!");
+            throw new DataIntegrityViolationException("Throwing exception for demoing @Transactional and Rollback !!!");
         }
 
         return null;

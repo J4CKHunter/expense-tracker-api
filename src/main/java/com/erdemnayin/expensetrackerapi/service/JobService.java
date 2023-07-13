@@ -21,7 +21,7 @@ public class JobService {
     }
 
     //everyDay -> At 01:00
-    @Scheduled(fixedRate = 2000)
+    @Scheduled(fixedRate = 10000)
     public void twentySeconds() {
         List<Transaction> transactionList = transactionService.getAllByLocalDate(LocalDate.now());
 
