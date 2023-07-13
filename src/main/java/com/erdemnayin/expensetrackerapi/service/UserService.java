@@ -7,6 +7,7 @@ import com.erdemnayin.expensetrackerapi.dto.request.UserWithTransactionsRequest;
 import com.erdemnayin.expensetrackerapi.dto.response.UserResponse;
 import com.erdemnayin.expensetrackerapi.dto.response.UserWithTransactionsResponse;
 import com.erdemnayin.expensetrackerapi.exception.GenericException;
+import com.erdemnayin.expensetrackerapi.exception.UserNotFoundException;
 import com.erdemnayin.expensetrackerapi.model.Role;
 import com.erdemnayin.expensetrackerapi.model.User;
 import com.erdemnayin.expensetrackerapi.repository.UserRepository;
@@ -114,7 +115,7 @@ public class UserService {
     public UserResponse getUserResponseById(Long id) {
 
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new GenericException("User not found by given id.", HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new UserNotFoundException("User not found by given id."));
 
         return convertUserResponse(user);
     }
