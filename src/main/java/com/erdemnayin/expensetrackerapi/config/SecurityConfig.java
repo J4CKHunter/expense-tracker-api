@@ -16,6 +16,7 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
@@ -37,6 +38,7 @@ import java.time.Duration;
 import java.util.List;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     private final RsaKeyProperties rsaKeyProperties;
@@ -61,20 +63,14 @@ public class SecurityConfig {
 //                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))) /*TODO: BUNA BAKILACAK*/
                 .cors(Customizer.withDefaults()) /*TODO: BUNA BAKILACAK*/
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/api/v1/auth/register").permitAll()
-                                .requestMatchers("/api/v1/auth/login").permitAll()
+                                .requestMatchers("/api/v1/auth/**").permitAll()
                                 .requestMatchers("/h2-console/**").permitAll()
-                                .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
-                                .requestMatchers("/api/v1/transactions/**").hasRole("ADMIN")
                                 .requestMatchers("/v3/api-docs/**").permitAll()
                                 .requestMatchers("/swagger-ui/**").permitAll()
+                                .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
+                                .requestMatchers("/api/v1/transactions/**").hasRole("ADMIN")
 
 
-//                        .requestMatchers("/api/admin").hasRole("ADMIN")
-//                        .requestMatchers("/api/user").hasAnyRole("ADMIN", "USER")
-//                        .requestMatchers("/api/public").permitAll()
-//                        .requestMatchers("/api/auth/login").permitAll()
-//                        .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin().disable()
