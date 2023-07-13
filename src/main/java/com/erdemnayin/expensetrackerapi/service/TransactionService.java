@@ -8,12 +8,10 @@ import com.erdemnayin.expensetrackerapi.exception.GenericException;
 import com.erdemnayin.expensetrackerapi.model.Transaction;
 import com.erdemnayin.expensetrackerapi.model.User;
 import com.erdemnayin.expensetrackerapi.repository.TransactionRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +48,7 @@ public class TransactionService {
         final Transaction transaction = new Transaction();
         transaction.setDetail(transactionRequest.getDetail());
         transaction.setPurchaseAmount(transactionRequest.getPurchaseAmount());
-        transaction.setLocalDateTime(LocalDateTime.now());
+        transaction.setLocalDate(LocalDate.now());
         transaction.setUser(userService.getUserById(transactionRequest.getUserId()));
 
         Transaction savedTransaction = transactionRepository.save(transaction);
@@ -92,8 +90,8 @@ public class TransactionService {
     }
 
 
-    public void getAllByLocalDateTimeBetween(LocalDateTime startDate, LocalDateTime endDate) throws InterruptedException{
-        List<Transaction> transactionList = transactionRepository.getAllByLocalDateTimeBetween(startDate, endDate).get();
+    public void getAllByLocalDateBetween(LocalDate startDate, LocalDate endDate) throws InterruptedException{
+        List<Transaction> transactionList = transactionRepository.getAllByLocalDateBetween(startDate, endDate);
         Map<Long,List<Transaction>> map = transactionList.stream().collect(Collectors.groupingBy(Transaction::getId));
         System.out.println(map);
     }
@@ -111,7 +109,7 @@ public class TransactionService {
         return TransactionResponse.builder()
                 .id(transaction.getId())
                 .detail(transaction.getDetail())
-                .localDateTime(transaction.getLocalDateTime())
+                .localDate(transaction.getLocalDate())
                 .purchaseAmount(transaction.getPurchaseAmount())
                 .userId(transaction.getUser().getId())
                 .build();
@@ -123,7 +121,7 @@ public class TransactionService {
         return new Transaction(
                 null,
                 transactionRequest.getDetail(),
-                LocalDateTime.now(),
+                LocalDate.now(),
                 transactionRequest.getPurchaseAmount(),
                 null);
     }
@@ -172,6 +170,10 @@ public class TransactionService {
                         .build()
         );
     }
+
+
+    // job'lar için
+
 
 
 

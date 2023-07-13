@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import static org.jobrunr.scheduling.cron.Cron.every30seconds;
 
@@ -32,7 +31,7 @@ public class JobController {
         // Schedule your job every 30 seconds
         jobScheduler.<TransactionService>scheduleRecurrently(
                 every30seconds(),
-                x -> x.getAllByLocalDateTimeBetween(LocalDateTime.now(), LocalDateTime.now().plusMonths(1L))
+                x -> x.getAllByLocalDateBetween(LocalDate.now(), LocalDate.now().plusMonths(1L))
         );
 
         // keep the main thread running

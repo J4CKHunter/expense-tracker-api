@@ -9,6 +9,7 @@ import org.jobrunr.scheduling.JobScheduler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.time.Instant;
@@ -21,6 +22,7 @@ import static org.jobrunr.scheduling.cron.Cron.every15seconds;
 @SpringBootApplication
 @EnableConfigurationProperties(RsaKeyProperties.class)
 @EnableTransactionManagement
+@EnableScheduling
 public class ExpenseTrackerApiApplication {
 	public static void main(String[] args){
 		SpringApplication.run(ExpenseTrackerApiApplication.class, args);

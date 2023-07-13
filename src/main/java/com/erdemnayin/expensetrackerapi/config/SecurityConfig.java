@@ -8,6 +8,11 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -134,5 +139,23 @@ public class SecurityConfig {
     @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public OpenAPI customOpenAPI(){
+
+        SecurityScheme jwtSchema = new SecurityScheme()
+                .type(SecurityScheme.Type.HTTP)
+                .bearerFormat("JWT");
+
+        return new OpenAPI()
+                .components(new Components().addSecuritySchemes("jwt",jwtSchema))
+                .info(new Info()
+                        .title("ExpenseTrackerAPI")
+                        .version("1.0")
+                        .description("A demo web-app app for Innova Hackathon")
+                        .license(new License().name("Expense-Tracker-API")))
+                ;
+
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.jobrunr.scheduling.cron.Cron.every15seconds;
@@ -83,63 +84,63 @@ public class StartupConfig implements CommandLineRunner {
         transactionRepository.save(new Transaction(
                 null,
                 "Porsche 956",
-                LocalDateTime.now(),
+                LocalDate.now(),
                 1000000D,
                 erdem));
 
         transactionRepository.save(new Transaction(
                 null,
                 "MacBook Pro 16",
-                LocalDateTime.now(),
+                LocalDate.now(),
                 95156D,
                 erdem));
 
         transactionRepository.save(new Transaction(
                 null,
                 "Transportation",
-                LocalDateTime.now(),
+                LocalDate.now(),
                 512D,
                 erdem));
 
         transactionRepository.save(new Transaction(
                 null,
                 "dj set",
-                LocalDateTime.now(),
+                LocalDate.now(),
                 12D,
                 giorgio));
 
         transactionRepository.save(new Transaction(
                 null,
                 "vinyl",
-                LocalDateTime.now(),
+                LocalDate.now(),
                 192D,
                 giorgio));
 
         transactionRepository.save(new Transaction(
                 null,
                 "headset",
-                LocalDateTime.now(),
+                LocalDate.now(),
                 123D,
                 todd));
 
         transactionRepository.save(new Transaction(
                 null,
                 "mic",
-                LocalDateTime.now(),
+                LocalDate.now(),
                 99D,
                 todd));
 
         transactionRepository.save(new Transaction(
                 null,
                 "guitar",
-                LocalDateTime.now(),
+                LocalDate.now(),
                 999D,
                 nile));
 
         transactionRepository.save(new Transaction(
                 null,
                 "guitar bass",
-                LocalDateTime.now(),
+                LocalDate.now(),
                 889D,
                 nile));
 
