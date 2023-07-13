@@ -108,6 +108,17 @@ public class TransactionService {
                 .build();
     }
 
+    // this is for the transactional scenario
+    public static Transaction convertResponse(TransactionRequest transactionRequest) {
+
+        return new Transaction(
+                null,
+                transactionRequest.getDetail(),
+                LocalDateTime.now(),
+                transactionRequest.getPurchaseAmount(),
+                null);
+    }
+
     // new endpoint
 
     public List<TotalPurchaseAmountResponse> getTotalPurchaseAmountForAll() {

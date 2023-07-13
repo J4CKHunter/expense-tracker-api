@@ -1,16 +1,22 @@
 package com.erdemnayin.expensetrackerapi.service;
 
 import com.erdemnayin.expensetrackerapi.dto.request.RegisterRequest;
+import com.erdemnayin.expensetrackerapi.dto.request.TransactionRequest;
 import com.erdemnayin.expensetrackerapi.dto.request.UserRequest;
+import com.erdemnayin.expensetrackerapi.dto.request.UserWithTransactionsRequest;
 import com.erdemnayin.expensetrackerapi.dto.response.UserResponse;
+import com.erdemnayin.expensetrackerapi.dto.response.UserWithTransactionsResponse;
 import com.erdemnayin.expensetrackerapi.exception.GenericException;
 import com.erdemnayin.expensetrackerapi.model.Role;
 import com.erdemnayin.expensetrackerapi.model.User;
 import com.erdemnayin.expensetrackerapi.repository.UserRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -147,4 +153,25 @@ public class UserService {
                 .build();
     }
 
+
+    // this is for the transactional scenario
+    @Transactional
+    public UserWithTransactionsResponse createUserWithTransactions(UserWithTransactionsRequest userWithTransactionsRequest) {
+
+        final User user = new User();
+        user.setFirstName(userWithTransactionsRequest.getFirstName());
+        user.setLastName(userWithTransactionsRequest.getLastName());
+        user.setEmail(userWithTransactionsRequest.getEmail());
+        user.setPassword(passwordEncoder.encode(userWithTransactionsRequest.getPassword()));
+        user.setRole(userWithTransactionsRequest.getRole());
+        user.setTransactions(new ArrayList<>());
+
+        for (TransactionRequest transactionRequest : userWithTransactionsRequest.getTransactionRequests()) {
+            user.getTransactions().add(TransactionService.convertResponse(transactionRequest));
+            throw new DataIntegrityViolationException("Throwing exception for demoing Rollback!!!");
+        }
+
+        return null;
+
+    }
 }

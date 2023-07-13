@@ -1,7 +1,9 @@
 package com.erdemnayin.expensetrackerapi.controller;
 
 import com.erdemnayin.expensetrackerapi.dto.request.UserRequest;
+import com.erdemnayin.expensetrackerapi.dto.request.UserWithTransactionsRequest;
 import com.erdemnayin.expensetrackerapi.dto.response.UserResponse;
+import com.erdemnayin.expensetrackerapi.dto.response.UserWithTransactionsResponse;
 import com.erdemnayin.expensetrackerapi.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +33,12 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest){
         return ResponseEntity.ok(userService.createUser(userRequest));
+    }
+
+    // this is for the transactional scenario
+    @PostMapping("/transactional")
+    public ResponseEntity<UserWithTransactionsResponse> createUserWithTransactions(@RequestBody UserWithTransactionsRequest userWithTransactionsRequest){
+        return ResponseEntity.ok(userService.createUserWithTransactions(userWithTransactionsRequest));
     }
 
     @DeleteMapping("/{id}")
