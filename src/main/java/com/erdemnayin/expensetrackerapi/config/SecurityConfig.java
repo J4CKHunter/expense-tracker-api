@@ -75,7 +75,6 @@ public class SecurityConfig {
                                 .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
                                 .requestMatchers("/api/v1/transactions/**").hasRole("ADMIN")
 
-
                         .anyRequest().authenticated()
                 )
                 .formLogin().disable()

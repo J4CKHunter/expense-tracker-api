@@ -9,7 +9,7 @@
 # second version
 #FROM maven:3.8.5-openjdk-17
 #EXPOSE 9000
-#ADD target/spring-rabbitmq-producer-0.0.1-SNAPSHOT.jar app.jar
+#ADD target/*.jar app.jar
 #ENTRYPOINT ["java","-jar","app.jar"]
 
 # third version

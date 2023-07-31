@@ -42,6 +42,7 @@ public class UserService {
         var user = findUserByEmail(email);
 
         return UserResponse.builder()
+                .id(user.getId())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
